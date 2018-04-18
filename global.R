@@ -1,5 +1,6 @@
 library(heatmaply)
 library(shiny)
+library(igraph)
 library(treemap)
 library(d3treeR)
 library(rgdal)
@@ -31,8 +32,9 @@ party_colors <- c(
 
 raw_first <- read.csv("all_tables_first_part.csv")
 raw_middle <- read.csv("all_tables_reduced.csv")
+raw_last <- read.csv("all_tables_last_part.csv")
 
-raw_data <- rbind(raw_first, raw_middle)
+raw_data <- rbind(raw_first, raw_middle,raw_last)
 levels(raw_data$section) <- gsub("[^\\-]*- ","",levels(raw_data$section))
 levels(raw_data$section) <- gsub("Bol[^v]*var","Bolivar",levels(raw_data$section))
 raw_data <- subset(raw_data, partido %in% names(logos))
